@@ -2,9 +2,9 @@
 
 <div class="container">
 
-<% if (arrayMascotas.length > 0) { %>
+<% if (arrayMascotasDB.length > 0) { %>
  
-<div class="table table-striped">
+<table class="table table-striped">
 
    <thead>
 
@@ -13,7 +13,7 @@
        <th scope="col">id</th>
        <th scope="col">nombre</th>
        <th scope="col">descripcion</th>
-       <th scope="col" colspan="2"></th>
+       <th scope="col" colspan="2">Acciones</th>
 
     </tr>
 
@@ -21,13 +21,13 @@
 
    <tbody>
 
-    <% arrayMascotas.forEach(mascota => { %>
+    <% arrayMascotasDB.forEach(mascota => { %>
 
      <tr>
 
-       <td>mascota.id</td>
-       <td>mascota.nombre</td>
-       <td>mascota.descripcion</td>
+       <td><%= mascota.id %></td>
+       <td><%= mascota.nombre %></td>
+       <td><%= mascota.descripcion %></td>
        <td>Editar</td>
        <td>Eliminar</td>
 
@@ -37,7 +37,7 @@
 
    </tbody>
 
-</div>
+</table>
 
 <% } %>
 
