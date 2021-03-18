@@ -8,9 +8,9 @@ router.get('/', async (req, res) => {
      try {
 
        const arrayMascotasDB= await mascota.find();
-       console.log(arrayMascotasDB);
+       /* console.log(arrayMascotasDB); */
 
-       res.render('/', {arrayMascotasDB})
+      res.render('/', {arrayMascotasDB: arrayMascotasDB})
 
      } catch (error) {
 
@@ -19,6 +19,13 @@ router.get('/', async (req, res) => {
      }
 
 });
+
+router.get('/crear', (req, res) => {
+
+  res.render('crear');
+
+});
+
 
 module.exports= router;
 
