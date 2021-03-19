@@ -14,13 +14,16 @@ const port = process.env.PORT || 3000;
 //conexion a base de datos
 const mongoose= require('mongoose');
 
-const uri= `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.w0ko4.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+const user= 'tabbako';
+const password= 'Z12X4j5KmP8clkwT';
+const dbname= 'veterinaria';
+
+const uri= `mongodb+srv://${user}:${password}@cluster0.w0ko4.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 
 mongoose.connect(uri,
      {useNewUrlParser: true, useUnifiedTopology: true})
      .then( ()=> console.log('Base de datos conectada'))
      .catch( (error)=> console.log('error: ' + error));
-
 
 //Usando ejs
 app.set("view engine", "ejs");

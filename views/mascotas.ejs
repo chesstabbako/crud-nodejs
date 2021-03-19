@@ -2,7 +2,9 @@
 
 <div class="container">
 
-<% if (arrayMascotasDB.length > 0) { %>
+<a href="/mascotas/crear" class="btn btn-success btn-block mb-4">Crear nuevo</a>
+
+<% if (arrayMascotas.length > 0) { %>
  
 <table class="table table-striped">
 
@@ -13,7 +15,7 @@
        <th scope="col">id</th>
        <th scope="col">nombre</th>
        <th scope="col">descripcion</th>
-       <th scope="col" colspan="2">Acciones</th>
+       <th scope="col">Acciones</th>
 
     </tr>
 
@@ -21,19 +23,18 @@
 
    <tbody>
 
-    <% arrayMascotasDB.forEach(mascota => { %>
+    <% arrayMascotas.forEach(mascota => { %>
 
      <tr>
 
        <td><%= mascota.id %></td>
        <td><%= mascota.nombre %></td>
        <td><%= mascota.descripcion %></td>
-       <td>Editar</td>
-       <td>Eliminar</td>
+       <td width="10px"><a class='btn btn-primary btn-sm' href="/mascotas/<%= mascota.id %>">Ver</a></td>
 
      </tr>
 
-    <% }) %>
+     <% }) %>
 
    </tbody>
 

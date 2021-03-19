@@ -1,0 +1,111 @@
+<%- include("templates/cabecera", {tituloWeb: "Leer mascota"}) %>
+
+<% if (error) { %>
+    <a href="/mascotas" class="btn btn-success btn-block mb-4">Volver</a>
+    <h1 class="text-danger"><%= mensaje %> </h1>
+<% } %>
+
+<% if (!error) { %>
+
+   <form id="editar" data-id="<%= mascotita.id %>">
+      <input 
+          type="text"
+          value="<%= mascotita.nombre %>"
+          class="form-control my-2"
+          name="nombre"
+          id="nombreInput"
+      >
+      <input 
+          type="text"
+          value="<%= mascotita.descripcion %>"
+          class="form-control my-2"
+          name="descripcion"
+          id="descripcionInput"
+      >
+      <button
+          class="btn btn-warning btn-sm"
+          type="submit"
+          
+      >
+          Editar
+      </button>
+  </form>
+
+  <hr>
+
+  <button
+      class="btn btn-danger btn-sm"
+      data-id="<%= mascotita.id %>"
+      id="btnEliminar"
+  >
+      Eliminar
+  </button>
+
+<% } %>
+   
+<%- include("templates/footer") %>
+
+<script>
+
+const btnEliminar= document.getElementById('btnEliminar');
+
+const id= btnEliminar.dataset.id;
+
+btnEliminar.addEventListener('click', async () => {
+
+  const res = await fetch(`/mascotas/${id}`, {
+
+   method: 'delete'
+
+  });
+
+  const respon = await res.json();
+
+  console.log(respon);
+
+  if (respon.estado) {
+
+     window.location.href= '/mascotas';
+
+  } else {
+     
+   console.log(respon.mensaje);
+
+  }
+
+});
+
+const formEditar = document.querySelector('#editar');
+
+formEditar.addEventListener('submit', async(e) => {
+    e.preventDefault()
+    // Alternativa #1 (capturar input)
+    const nombre = formEditar.elements['nombre'].value
+    // Alternativa #2 (capturar input)
+    const descripcion = document.querySelector('#descripcionInput').value
+    const id = formEditar.dataset.id 
+
+    console.log(nombre);
+    console.log(descripcion);
+    console.log(id);
+
+    const data = await fetch(`/mascotas/${id}`, {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({nombre, descripcion})
+    })
+
+    const res = await data.json()
+
+    if(res.estado){
+        window.location.href = `/mascotas/${id}`
+    }else{
+        console.log(res)
+    }
+
+})
+
+</script>
